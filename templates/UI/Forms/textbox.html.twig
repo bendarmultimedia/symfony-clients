@@ -1,0 +1,16 @@
+
+<div class="col-6">
+    <div class="form-group row">
+        <label class="col-4 col-form-label">
+        {% if textbox['label'] is defined %}
+            {{textbox['label']}}
+        {% endif %}
+        </label>
+        <div class="col-8">
+            <input class="form-control" type="textbox"  
+            id="{% if textbox['id'] is defined %}{{textbox['id']}}{% endif %}" 
+            name="{% if textbox['name'] is defined %}{{textbox['name']}}{% endif %}" 
+            value="{% if textbox['value'] is defined %}{{textbox['value']}}{% endif %}">
+        </div>
+    </div>
+</div>

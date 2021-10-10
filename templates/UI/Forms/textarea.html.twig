@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label for="{{textarea.id}}" class="form-label">{{textarea.label}}</label>
+    <textarea id="{{textarea.id}}" name="{{textarea.name}}"
+        {% for attrName, attrValue in textarea.attributes %}
+                {{attrName}}="{{attrValue}}"
+        {% endfor %}
+
+        class={{textarea.classNames}}
+    >{{textarea.value}}</textarea>
+</div>

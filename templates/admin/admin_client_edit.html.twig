@@ -1,0 +1,30 @@
+{% extends "admin/base.html.twig" %}
+
+
+ {% block body %}
+ <main class="mt-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+            <div class="col-12"><span class="badge badge-info bg-info">#{{client.id}}</span></div>
+            <div class="col-12">
+                {{ form_start(form, {'method': 'POST'}) }}
+                    {{ form_widget(form) }}
+                
+                    <button class=" mt-3 btn btn-block btn-primary w-100" type="submit">
+                        <i class="fas fa-save"></i>
+                        {{ "save"|trans|capitalize  }}
+                    </button>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+      </section>
+     
+      <!--Section: Content-->
+    </div>
+  </main>
+  <!--Main layout-->  
+ {% endblock body %}
+ 

@@ -1,0 +1,14 @@
+    <div class="form-group">
+        <label for="{{select.id}}" class="form-label">{{select.label}}</label>
+        <select id="{{select.id}}" name="{{select.name}}" data-size="8" class="{{select.classNames}}"
+            {% for attrName, attrValue in select.attributes %}
+                {{attrName}}="{{attrValue}}"
+            {% endfor %}
+        
+        >
+            {% set selected = '' %}
+            {% for option in select.options %}
+            <option value="{{option.value}}" {{ option.value ==  select.choosen ? 'selected' : '' }}>{{option.name}}</option>
+            {% endfor %}
+        </select>
+    </div>

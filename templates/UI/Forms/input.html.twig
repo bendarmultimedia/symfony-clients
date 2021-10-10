@@ -1,0 +1,20 @@
+{% if input.container == true %}<div class="{{input.containerClassNames}}">{% endif %}
+
+    {% if input.labelAfter == false %}
+        {% if input.disableLabel == false %}
+            <label for="{{input.id}}" class="{{input.labelClassNames}}">{{input.label|raw}}</label>
+        {% endif %}
+    {% endif %}
+    <input type="{{input.type}}" id="{{input.id}}" name="{{input.name}}"
+        {% for attrName, attrValue in input.attributes %}
+                {{attrName}}="{{attrValue}}"
+        {% endfor %}
+        class="{{input.classNames}}"
+        value="{{input.value}}"
+     />
+     {% if input.labelAfter == true %}
+        {% if input.disableLabel == false %}
+            <label for="{{input.id}}" class="{{input.labelClassNames}}">{{input.label|raw}}</label>
+        {% endif %}
+     {% endif %}
+{% if input.container == true %}</div>{% endif %}

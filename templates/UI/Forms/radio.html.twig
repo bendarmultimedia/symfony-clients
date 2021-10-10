@@ -1,0 +1,15 @@
+<div class="form-group row">
+	<div class="col-lg-12 radio-label">{{productField.polishName}}</div>
+	{% set checked = '' %}
+	{% for fieldOption in fieldOptions %}
+		<div class="col-lg-6">
+			{% if fieldOption.value ==  value %}
+				{% set checked = 'checked' %}
+			{% else %}
+				{% set checked = '' %}
+			{% endif %}
+		<input id="productField_{{productField.id}}_radio_fieldOption{{fieldOption.id}}" value="{{fieldOption.value}}" name="productFields[{{productField.id}}]" type="radio" class="with-gap radio-col-orange" {{checked}}>
+		<label for="productField_{{productField.id}}_radio_fieldOption{{fieldOption.id}}">{{fieldOption.polishName}}</label>
+		</div>
+	{% endfor %}
+</div>

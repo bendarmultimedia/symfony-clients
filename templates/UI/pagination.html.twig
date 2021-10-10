@@ -1,0 +1,12 @@
+
+<nav aria-label="pagination">
+  <ul class="pagination">
+      {% for pageNum in 1..pagesCount %}
+          {% if pageNum == page %}
+          <li class="page-item disabled"><a class="page-link font-weight-bold text-black" href="#">{{pageNum}}</a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link" href="{{ path(pathName, { 'page': pageNum }) }}">{{pageNum}}</a></li>
+          {% endif %}
+      {% endfor %}
+  </ul>
+</nav>

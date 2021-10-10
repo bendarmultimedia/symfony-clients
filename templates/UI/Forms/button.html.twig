@@ -1,0 +1,4 @@
+{% if button.container == true %}<div class="{{button.containerClassNames}}">{% endif %}
+<button id="{{button.id}}" {% for attrName, attrValue in button.attributes %} {{attrName}}="{{attrValue}}" {% endfor %} class="{{button.classNames}}"
+>{{button.text|raw}}</button>
+{% if button.container == true %}</div>{% endif %}

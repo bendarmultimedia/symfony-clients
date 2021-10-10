@@ -1,0 +1,4 @@
+{% if alert.container == true %}<div class="{{alert.containerClassNames}}">{% endif %}
+<div id="{{alert.id}}" {% for attrName, attrValue in alert.attributes %} {{attrName}}="{{attrValue}}" {% endfor %} class="alert {{alert.classNames}}"
+>{{alert.text|raw}}</div>
+{% if alert.container == true %}</div>{% endif %}

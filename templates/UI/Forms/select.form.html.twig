@@ -1,0 +1,26 @@
+{% if select.container == true %}<div class="{{select.containerClassNames}}">{% endif %}
+    <label for="{{select.id}}" class="{{select.labelClassNames}} mr-1">{{select.label|raw}}</label>
+    <select id="{{select.id}}" name="{{select.name}}" class="{{select.classNames}}"
+        {% for attrName, attrValue in select.attributes %}
+            {{attrName}}="{{attrValue}}"
+        {% endfor %}
+    
+    >
+        {% set selected = '' %}
+        {% for option in select.options %}
+        <option value="{{option.value}}" {{ option.value in  select.choosen ? 'selected' : '' }}
+            {% if option.attributes is defined %}
+                {% for attrName, attrValue in option.attributes %}
+                    {{attrName}}="{{attrValue}}"
+                {% endfor %}
+            {% endif %}
+        >{{option.name}}</option>
+        {% endfor %}
+    </select>
+    {% if select.clearButton == true %}
+        <button class="btn btn-primary btn-xs clear-selectpicker-value p-0" title='{{"Wyczyść filtr"|trans}}'><span class="fa-stack fa-1x p-0">
+            <i class="fas fa-filter fa-stack-1x"></i>
+            <i class="fas fa-ban fa-stack-1x text-danger"></i>
+          </span></button>
+    {% endif %}
+{% if select.container == true %}</div>{% endif %}

@@ -1,0 +1,16 @@
+{% if checkbox.container == true %}<div class="{{checkbox.containerClassNames}}">{% endif %}
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" id="{{checkbox.id}}" name="{{checkbox.name}}"
+        {% for attrName, attrValue in checkbox.attributes %}
+                {{attrName}}="{{attrValue}}"
+        {% endfor %}
+        class="{{checkbox.classNames}}"
+        value="{{checkbox.value}}"
+        {% if checkbox.checked == true %}
+            checked="checked"
+        {% endif %}
+     />
+        {# <label class="custom-control-label checkbox-success outline" for="user_isActive">Aktywny</label> #}
+        <label for="{{checkbox.id}}" class="{{checkbox.labelClassNames}} mr-1">{{checkbox.label|raw}}</label>
+    </div>
+{% if checkbox.container == true %}</div>{% endif %}

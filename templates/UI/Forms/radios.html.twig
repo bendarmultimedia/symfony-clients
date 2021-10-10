@@ -1,0 +1,20 @@
+{% if radios.container == true %}<div class="{{radios.containerClassNames}}">{% endif %}
+    <span>{{radios.description}}</span> <br>
+    <div class=" d-flex full-width justify-content-around">
+    {% for option in radios.options %}
+        <div class="{{radios.classNames}}">
+            <input type="radio" id="rad_{{radios.id}}_{{option.value}}" name="{{radios.name}}"
+                {% for attrName, attrValue in radios.attributes %}
+                        {{attrName}}="{{attrValue}}"
+                {% endfor %}
+                class="{{radios.inputClassNames}}"
+                value="{{option.value}}"
+                {{ option.value in radios.choosen ? ' checked="checked"' : '' }}
+
+            />
+            {# <label class="custom-control-label checkbox-success outline" for="user_isActive">Aktywny</label> #}
+            <label for="rad_{{radios.id}}_{{option.value}}" class="{{radios.labelClassNames}} mr-1">{{option.name|raw}}</label>
+        </div>
+        {% endfor %}
+    </div>
+{% if radios.container == true %}</div>{% endif %}

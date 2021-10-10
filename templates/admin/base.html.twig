@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="robots" content="index, follow, archive, snippet" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fa.min.css') }}">
+
+        <title>
+            {% block title %}Welcome!{% endblock %}
+        </title>
+        </script>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block header_javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% set routeName = app.request.attributes.get('_route') %}
+        {% include "admin/header.html.twig" %}
+        {% include 'shared/flashes.html.twig' %}
+        {% block body %}{% endblock %}
+
+        {% include "admin/footer.html.twig" %}
+    </body>
+
+
+    {% block footer_javascripts %}
+        
+    {% endblock %}
+</html>
+  
+  
+ 
+
+  

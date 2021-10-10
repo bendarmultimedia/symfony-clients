@@ -1,0 +1,305 @@
+<div class="sidebar">
+	<div
+		class="site-width">
+
+		<!-- START: Menu-->
+		<ul id="side-menu" class="sidebar-menu">
+			<li class="dropdown">
+				<a href="#">
+					<i class="icon-home mr-1"></i>
+					{{"MP Nexo Manager"|trans|capitalize }}</a>
+				<ul>
+					<li class="{% if app.request.get('_route') == 'main' %}active{% endif %}">
+						<a href="{{path('main')}}">
+							<i class="icon-rocket"></i>
+							{{"Panel"|trans|capitalize }}</a>
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown ">
+				<a href="#">
+					<i class="icon-layers mr-1"></i>
+					Moduły</a>
+				<ul>
+					<li class="dropdown">
+						<a href="#">
+							<i class="icon-book-open mr-1"></i>
+							{{ "Dokumenty NEXO"|trans|capitalize  }}
+						</a>
+						<ul class="sub-menu">
+							<li class="{% if app.request.get('_route') == 'serial_search' %}active{% endif %}">
+								<a href="{{ path('serial_search') }}">
+									<i class="icon-tag d-inline mr-1"></i>
+									{{ "Wyszukaj nr seryjny"|trans|capitalize  }}</a>
+							</li>
+							<li class="{% if app.request.get('_route') == 'serial_imported' %}active{% endif %}">
+								<a href="{{ path('serial_imported') }}">
+									<i class="fas fa-file d-inline mr-1"></i>
+									{{ "Zaimportowane pliki"|trans|capitalize  }}</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="dropdown {% if ((app.user.roles|checkUserAccessForRole(['ROLE_HUMAN_RESOURCES'])) or (app.request.get('_route') in ['absence_calendar', 'absence_add', 'absence_edit', 'absence_for_user', 'absence_list', 'absence_settings', 'absence_settings_preview', 'absence_settings_specific', 'absence_kinds_list'])) %} active {% endif %}">
+						<a href="#">
+							<i class="icon-clock"></i>
+							{{ "Nieobecności"|trans|capitalize  }}</a>
+						<ul class="sub-menu">
+							<li class="{% if app.request.get('_route') == 'absence_calendar' %}active{% endif %}">
+								<a href="{{ path('absence_calendar') }}">
+									<i class="mdi mdi-calendar-text d-inline mr-2"></i>
+									{{ "Kalendarz"|trans|capitalize  }}</a>
+							</li>
+							<li class="{% if app.request.get('_route') == 'absence_add' %}active{% endif %}">
+								<a href="{{ path('absence_add') }}">
+									<i class="mdi mdi-calendar-plus d-inline mr-2"></i>
+									{{ "Dodaj nieobecność"|trans|capitalize  }}</a>
+							</li>
+                            {% if app.user.roles|checkUserAccessForRole(['ROLE_HUMAN_RESOURCES']) %}
+                                <li class="{% if app.request.get('_route') in ['absence_for_user', 'absence_list'] %}active{% endif %}">
+							    	<a href="{{ path('absence_for_user') }}">
+							    		<i class="fas fa-th-list d-inline mr-2"></i>
+							    		{{ "Lista nieobecności"|trans|capitalize  }}</a>
+							    </li>
+							{% else %}
+                                <li class="{% if app.request.get('_route') in ['absence_for_user', 'absence_list'] %}active{% endif %}">
+							    	<a href="{{ path('absence_for_user') }}">
+							    		<i class="fas fa-th-list d-inline mr-2"></i>
+							    		{{ "Moje nieobecności"|trans|capitalize  }}</a>
+							    </li>
+
+							{% endif %}
+
+							{% if app.user.roles|checkUserAccessForRole(['ROLE_HUMAN_RESOURCES']) %}
+								<li class="{% if app.request.get('_route') in ['absence_settings', 'absence_settings_specific'] %}active{% endif %}">
+									<a href="{{ path('absence_settings') }}">
+										<i class="fas fa-wrench d-inline mr-2"></i>
+										{{ "Ustawienia"|trans|capitalize  }}</a>
+								</li>
+							{% else %}
+								<li class="{% if app.request.get('_route') in ['absence_settings_preview', 'absence_settings_preview_specific'] %}active{% endif %}">
+									<a href="{{ path('absence_settings_preview') }}">
+										<i class="fas fa-wrench d-inline mr-2"></i>
+										{{ "Ustawienia"|trans|capitalize  }}</a>
+								</li>
+
+							{% endif %}
+							{% if app.user.roles|checkUserAccessForRole(['ROLE_HUMAN_RESOURCES']) %}
+								<li class="{% if app.request.get('_route') in ['absence_kinds_list'] %}active{% endif %}">
+									<a href="{{ path('absence_kinds_list') }}">
+										<i class="fas fa-list d-inline mr-2"></i>
+										{{ "Rodzaje nieobecności"|trans|capitalize  }}</a>
+								</li>
+							{% endif %}
+						</ul>
+					</li>
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_WAREHOUSE', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+						<li class="dropdown {%  if app.request.get('_route') in ['shipping_current_mp', 'shipping_current_fatek', 'shipping_archives_mp' ] %} active {% endif %}">
+							<a href="#">
+								<i class="fas fa-dolly"></i>
+								{{ "Wysyłki"|trans|capitalize  }}</a>
+							<ul class="sub-menu">
+								<li class="{% if app.request.get('_route') == 'shipping_current_mp' %}active{% endif %}">
+									<a href="{{ path('shipping_current_mp') }}">
+										<i class="fas fa-shipping-fast d-inline mr-2"></i>
+										{{"Aktualne MP"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'shipping_current_fp' %}active{% endif %}">
+									<a href="{{ path('shipping_current_fatek') }}">
+										<i class="fas fa-shipping-fast d-inline mr-2"></i>
+										{{"Aktualne FP"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') in ['shipping_archives_mp'] %}active{% endif %}">
+									<a href="{{ path('shipping_archives_mp') }}">
+										<i class="fas fa-box d-inline mr-2"></i>
+										{{ "Archiwum"|trans|capitalize  }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_FINANCES', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+						<li class="dropdown {% if app.request.get('_route') in ['gus_check_manual', 'gus_automatic_verification', 'trade_credit'] %} active {% endif %}">
+							<a href="#">
+								<i class="fas fa-user-check"></i>
+								{{ "Kontrahenci"|trans|capitalize  }}
+							</a>
+							<ul class="sub-menu">
+								<li class="{% if app.request.get('_route') == 'gus_automatic_verification_mp' %}active{% endif %}">
+									<a href="{{ path('gus_automatic_verification_mp') }}">
+										<i class="fas fa-robot d-inline mr-2"></i>
+										{{"Weryfikacja danych klientów MP"|trans|capitalize  }}
+									</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'gus_automatic_verification_fp' %}active{% endif %}">
+									<a href="{{ path('gus_automatic_verification_fp') }}">
+										<i class="fas fa-robot d-inline mr-2"></i>
+										{{"Weryfikacja danych klientów FP"|trans|capitalize  }}
+									</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'gus_data_control_canceled' %}active{% endif %}">
+									<a href="{{ path('gus_data_control_canceled') }}">
+										<i class="fab fa-wpforms d-inline mr-2"></i>
+										{{"Lista niesprawdzanych klinetów"|trans|capitalize  }}
+									</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_FINANCES', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+						<li class="dropdown {% if app.request.get('_route') in ['finances_index', 'finances_internal_multipliers', 'finances_trade_credit_multipliers'] %}active{% endif %}">
+							<a href="#">
+								<i class="fas fa-money-bill-wave"></i>
+								{{ "Finanse"|trans|capitalize  }}</a>
+							<ul class="sub-menu">
+								<li class="{% if app.request.get('_route') == 'finances_internal_multipliers' %}active{% endif %}">
+									<a href="{{ path('finances_internal_multipliers') }}">
+										<i class="fas fa-coins d-inline mr-2"></i>
+										{{ "Mnożniki narzutu"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'finances_trade_credit_multipliers' %}active{% endif %}">
+									<a href="{{ path('finances_trade_credit_multipliers') }}">
+										<i class="fas fa-coins d-inline mr-2"></i>
+										{{ "Kredyt kupiecki"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'raport_sellers' %}active{% endif %}">
+									<a href="{{ path('raport_sellers') }}">
+										<i class="fas fa-coins d-inline mr-2"></i>
+										{{ "Raport sprzedaży"|trans|capitalize  }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_STOCK', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+						<li class="dropdown {% if app.request.get('_route') in ['stock_index', 'stock_groups', 'stock_search'] %}active{% endif %}">
+							<a href="#">
+								<i class="fas fa-archive"></i>
+								{{ "Asortymenty"|trans|capitalize  }}</a>
+							<ul class="sub-menu">
+								<li class="{% if app.request.get('_route') == 'stock_search' %}active{% endif %}">
+									<a href="{{ path('stock_search') }}">
+										<i class="fas fa-search d-inline mr-2"></i>
+										{{ "Katalog Asortymentów"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'stock_groups' %}active{% endif %}">
+									<a href="{{ path('stock_groups') }}">
+										<i class="fas fa-boxes d-inline mr-2"></i>
+										{{ "Grupy asortymentów"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'unique_stock_set' %}active{% endif %}">
+									<a href="{{ path('unique_stock_set') }}">
+										<i class="fas fa-search d-inline mr-2"></i>
+										{{ "Indywidualny stan optymalny"|trans|capitalize  }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					<li class="dropdown {% if app.request.get('_route') in ['user_list', 'user_edit', 'departament_list', 'departament_edit'] %}active{% endif %}">
+						<a href="#">
+							<i class="fas fa-users"></i>
+							{{ "Pracownicy"|trans|capitalize  }}</a>
+						<ul class="sub-menu">
+							<li class="{% if app.request.get('_route') == 'user_list' %}active{% endif %}">
+								<a href="{{ path('user_list') }}">
+									<i class="fas fa-user d-inline mr-2"></i>
+									{{ "Lista pracowników"|trans|capitalize  }}</a>
+							</li>
+							<li class="{% if app.request.get('_route') == 'departament_list' %}active{% endif %}">
+								<a href="{{ path('departament_list') }}">
+									<i class="fas fa-briefcase d-inline mr-2"></i>
+									{{ "Działy"|trans|capitalize  }}</a>
+							</li>
+						</ul>
+					</li>
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_WAREHOUSE', 'ROLE_HUMAN_RESOURCES', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN']) %}
+
+						<li class="dropdown {% if app.request.get('_route') in ['serial_import', 'import_shelf', 'absence_import'] %}active{% endif %}">
+							<a href="#">
+								<i class="icon-layers"></i>
+								{{ "Import"|trans|capitalize  }}</a>
+							<ul class="sub-menu">
+								<li class="{% if app.request.get('_route') == 'serial_import' %}active{% endif %}">
+									<a href="{{ path('serial_import') }}">
+										<i class="fas fa-file-import d-inline mr-2"></i>
+										{{ "Numery seryjne"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'import_shelf' %}active{% endif %}">
+									<a href="{{ path('import_shelf') }}">
+										<i class="fas fa-pallet d-inline mr-2"></i>
+										{{ "Aktualizacja Półek"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'absence_import' %}active{% endif %}">
+									<a href="{{ path('absence_import') }}">
+										<i class="fas fa-upload  d-inline mr-2"></i>
+										{{ "Nieobecności"|trans|capitalize  }}</a>
+								</li>
+								<li class="{% if app.request.get('_route') == 'linmot_import' %}active{% endif %}">
+									<a href="{{ path('linmot_import') }}">
+										<i class="fas fa-upload  d-inline mr-2"></i>
+										{{ "Import Cen - Linmot"|trans|capitalize  }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					{% if app.user.roles|checkUserAccessForRole(['ROLE_SUPER_ADMIN']) %}
+
+						<li class="dropdown">
+							<a href="#">
+								<i class="fas fa-wrench"></i>
+								{{ "Narzędzia"|trans|capitalize  }}</a>
+							<ul class="sub-menu">
+								<li class="">
+									<a href="/cmd/manualpull_exec.php" target="_blank">
+										<i class="fas fa-code-branch d-inline mr-2"></i>
+										{{ "Import zmian"|trans|capitalize  }}</a>
+								</li>
+								<li class="">
+									<a href="/cmd/clear_cache.php" target="_blank">
+										<i class="fas fa-times d-inline mr-2"></i>
+										{{ "Czyszczenie cache"|trans|capitalize  }}</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+                    {% if app.request.attributes.get('_route_params')['user'] is defined %}
+                        {% set userIdSent = app.request.attributes.get('_route_params')['user'] %}
+                    {% else %}
+                        {% set userIdSent = 0 %}
+                    {% endif %}
+                    <li class="dropdown {%  if app.request.get('_route') in ['user_settings'] 
+                    or (app.request.get('_route') in ['user_edit'] and userIdSent > 0) %} active {% endif %}">
+                        
+                        <a href="#">
+                            <i class="fas fa-user-circle"></i>
+                            {{ "konto"|trans|capitalize  }}</a>
+                        <ul class="sub-menu">
+                            <li class="{% if app.request.get('_route') in ['user_edit'] and userIdSent > 0 %}active{% endif %}">
+                                <a href="{{path('user_edit', {'user': app.user.id})}}">
+                                    <i class="fas fa-user d-inline mr-2"></i>
+                                    {{"Profil"|trans|capitalize  }}</a>
+                            </li>
+                            <li class="{% if app.request.get('_route') == 'user_settings' %}active{% endif %}">
+                                <a href="{{ path('user_settings') }}">
+                                    <i class="fas fa-wrench d-inline mr-2"></i>
+                                    {{"Ustawienia"|trans|capitalize  }}</a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+
+				</ul>
+			</li>
+		</ul><!-- END: Menu--><ol class="breadcrumb bg-transparent align-self-center m-0 p-0 ml-auto">
+			<li class="breadcrumb-item">
+				<a href="#">Application</a>
+			</li>
+			<li class="breadcrumb-item active">Application</li>
+		</ol>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+ {% extends "public/base.html.twig" %}
+ {% block body %}
+ <main class="mt-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+            <div class="col-12">
+               {% if clients is defined %}
+                   {% include "shared//clients_table.html.twig" %}
+               {% endif %}
+            </div>
+            <div class="col-12">
+                {{pagination|raw}}
+            </div>
+        </div>
+      </section>
+     
+      <!--Section: Content-->
+    </div>
+  </main>
+  <!--Main layout-->  
+ {% endblock body %}
+ 

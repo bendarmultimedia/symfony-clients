@@ -1,0 +1,16 @@
+individual: "indywidualny"
+business: "firma"
+first name: "imię"
+last name: "nazwisko"
+kind: "rodzaj"
+
+Your default admin login is: "Twój domyślny login admina to"
+and password is: "a hasło to"
+
+Sign in: Zaloguj
+Sign out: Wyloguj
+password: hasło
+Please sign in: Proszę się zalogować
+save: zapisz
+Data saved: Dane zapisane
+Admin panel: Panel administracyjny
