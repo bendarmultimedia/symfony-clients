@@ -31,11 +31,13 @@ class InstallCommand extends Command
         $translator = $this->container->get('translator');
         $translator->setLocale("pl");
 
-        $migrationMakeCmd = $this->getApplication()->find('make:migration');
-        $returnCode = $migrationMakeCmd->run($input, $output);
-
-        $migrationCmd = $this->getApplication()->find('doctrine:migrations:migrate');
-        $returnCode = $migrationCmd->run($input, $output);
+        $schemaCmd = $this->getApplication()->find('doctrine:schema:update');
+        $arguments = [
+            '--force'  => true,
+        ];
+        $forceInput = new ArrayInput($arguments);
+        
+        $returnCode = $schemaCmd->run($forceInput, $output);
 
         $fixtureCommand = $this->getApplication()->find('doctrine:fixtures:load');
         $returnCode = $fixtureCommand->run($input, $output);
