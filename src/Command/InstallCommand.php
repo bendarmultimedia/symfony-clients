@@ -31,21 +31,27 @@ class InstallCommand extends Command
         $translator = $this->container->get('translator');
         $translator->setLocale("pl");
 
+        $migrationMakeCmd = $this->getApplication()->find('make:migration');
+        $returnCode = $migrationMakeCmd->run($input, $output);
+
+        $migrationCmd = $this->getApplication()->find('doctrine:migrations:migrate');
+        $returnCode = $migrationCmd->run($input, $output);
+
         $fixtureCommand = $this->getApplication()->find('doctrine:fixtures:load');
         $returnCode = $fixtureCommand->run($input, $output);
         $output->writeln("=========");
         $output->writeln(
             $translator->trans("Your default admin login is")
-            . ": <info>"
-            . $_SERVER['ADMIN_EMAIL']
-            . '</info>'
+                . ": <info>"
+                . $_SERVER['ADMIN_EMAIL']
+                . '</info>'
         );
 
         $output->writeln(
             $translator->trans("and password is")
-            . ": <info>"
-            . $_SERVER['ADMIN_PASSWORD']
-            . "</info>"
+                . ": <info>"
+                . $_SERVER['ADMIN_PASSWORD']
+                . "</info>"
         );
         $output->writeln("=========");
         return $returnCode;
