@@ -1,5 +1,5 @@
 # symfony-clients
-Zadanie testowe
+Przykładowa mini-aplikacja
 ## Przygotowanie do instalacji
 1. Przed instalacją w pliku .env należy ustawić dostęp do bazy danych:
 ```

@@ -1,5 +1,5 @@
 {% extends "admin/base.html.twig" %}
-{% block title %} {% endblock title %}
+{% block title %} Lista klientów {% endblock title %}
 
 
  {% block body %}
@@ -8,6 +8,10 @@
       <!--Section: Content-->
       <section>
         <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <a href="{{path('admin_client_add')}}" class="btn w-100 btn-success"><i class="fas fa-plus"></i> Dodaj klienta</a>
+            </div>
             <div class="col-12">
                {% if clients is defined %}
                    {% include "shared//clients_table.html.twig" %}

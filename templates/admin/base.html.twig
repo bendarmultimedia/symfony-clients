@@ -9,7 +9,12 @@
         <link rel="stylesheet" href="{{ asset('css/fa.min.css') }}">
 
         <title>
-            {% block title %}Welcome!{% endblock %}
+            {% block title %}
+            {% if page is defined %}
+                {{page.title}}
+            {% endif %}
+            - Panel zarządzania
+            {% endblock %}
         </title>
         </script>
         {# Run `composer require symfony/webpack-encore-bundle`
